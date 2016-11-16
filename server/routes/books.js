@@ -37,9 +37,9 @@ router.post('/', function(req, res) {
     }
 
     client.query(
-      'INSERT INTO books (title, author, published, genre) ' +
-      'VALUES ($1, $2, $3, $4)',
-      [newBook.title, newBook.author, newBook.published, newBook.genre],
+      'INSERT INTO books (title, author, published, genre, edition, publisher) ' +
+      'VALUES ($1, $2, $3, $4, $5, $6)',
+      [newBook.title, newBook.author, newBook.published, newBook.genre, newBook.edition, newBook.publisher],
       function(err, result) {
         done();
 
@@ -54,6 +54,61 @@ router.post('/', function(req, res) {
   });
 
 });
+
+router.delete('/:id', function(req, res) {
+  bookID = req.params.id;
+
+  console.log('book id to delete: ', bookID);
+  pg.connect(connectionString, function(err, client, done) {
+    if(err) {
+      console.log('connection error: ', err);
+      res.sendStatus(500);
+    }
+
+    client.query(
+      'DELETE FROM books WHERE id = $1',
+      [bookID],
+      function(err, result) {
+        done();
+
+        if(err) {
+          res.sendStatus(500);
+        } else {
+          res.sendStatus(200);
+        }
+      });
+    });
+
+});
+
+router.put('/:id', function(req, res) {
+  bookID = req.params.id;
+  book = req.body;
+
+  console.log('book to update ', book);
+
+  pg.connect(connectionString, function(err, client, done) {
+    if(err) {
+      console.log('connection error: ', err);
+      res.sendStatus(500);
+    }
+
+    client.query(
+      'UPDATE books SET title=$1, author=$2, genre=$3, published=$4, edition=$5, publisher=$6' +
+      ' WHERE id=$7',
+      // array of values to use in the query above
+      [book.title, book.author, book.genre, book.published, book.edition, book.publisher, bookID],
+      function(err, result) {
+        if(err) {
+          console.log('update error: ', err);
+          res.sendStatus(500);
+        } else {
+          res.sendStatus(200);
+        }
+      });
+    }); // close connect
+
+}); // end route
 
 
 module.exports = router;
