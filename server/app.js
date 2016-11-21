@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var books = require('./routes/books');
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.json()); // needed by Angular
 
 // middleware that doesn't do much
 app.use(function(req, res, next) {
