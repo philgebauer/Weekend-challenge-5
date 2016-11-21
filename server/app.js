@@ -5,6 +5,13 @@ var bodyParser = require('body-parser');
 var books = require('./routes/books');
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// middleware that doesn't do much
+app.use(function(req, res, next) {
+  console.log('hello from express!');
+  next();
+});
 
 // Our routes
 app.use('/books', books);

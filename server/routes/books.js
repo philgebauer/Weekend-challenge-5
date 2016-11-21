@@ -3,8 +3,15 @@ var router = express.Router();
 var pg = require('pg');
 var connectionString = 'postgres://localhost:5432/sigma';
 
+router.get('/:genre/*/*', function(req, res, next) {
+  console.log('req params', req.params);
+  req.message = "hello from the previous middleware!";
+  res.send('done');
+  // next();
+});
+
 router.get('/', function(req, res) {
-  console.log('get request');
+  console.log('message on REC: ', req.message);
   // get books from DB
   pg.connect(connectionString, function(err, client, done) {
     if(err) {
@@ -30,6 +37,7 @@ router.get('/', function(req, res) {
 
 router.post('/', function(req, res) {
   var newBook = req.body;
+  console.log(newBook);
   pg.connect(connectionString, function(err, client, done) {
     if(err) {
       console.log('connection error: ', err);
