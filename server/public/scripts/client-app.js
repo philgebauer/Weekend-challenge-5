@@ -30,6 +30,19 @@ myApp.controller("BookController", ["$http", function($http) {
 
   self.clickMe = function(bookObj) {
     console.log(bookObj);
+    $http.delete('/books/' + bookObj.id)
+      .then(function(response){
+        console.log('delete finsihsed');
+        getBooks();
+      })
+  }
+
+  self.updateMe = function(bookObj){
+    $http.put('/books/'+ bookObj.id, bookObj)
+    .then(function(response){
+      console.log('Edit finsihsed');
+      getBooks();
+    })
   }
 
 }]);

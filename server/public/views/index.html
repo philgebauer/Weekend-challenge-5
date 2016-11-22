@@ -49,9 +49,20 @@
       </form>
 
       <h2>Books</h2>
-      <div class="book" ng-repeat="book in bookController.books">
-        <p>{{book.title}} By: {{book.author}}</p>
-        <button ng-click="bookController.clickMe(book)">Click Me</button>
+      <select ng-model="bookController.searchObject" ng-options="book.genre for book in bookController.books">
+
+      </select>
+      <div class="book" ng-repeat="book in bookController.books | filter: {'genre': bookController.searchObject.genre} ">
+
+        <input ng-model="book.title" />
+        <input ng-model="book.author"/>
+        <input ng-model="book.published" />
+        <input ng-model="book.genre"/>
+        <input ng-model="book.edition" />
+        <input ng-model="book.publisher"/>
+
+        <button ng-click="bookController.clickMe(book)">Delete</button>
+        <button ng-click="bookController.updateMe(book)">Edit</button>
       </div>
     </main>
 
