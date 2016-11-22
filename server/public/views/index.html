@@ -49,11 +49,10 @@
       </form>
 
       <h2>Books</h2>
-      <ul>
-        <li ng-repeat="book in bookController.books">
-          {{book.title}} By: {{book.author}}
-        </li>
-      </ul>
+      <div class="book" ng-repeat="book in bookController.books">
+        <p>{{book.title}} By: {{book.author}}</p>
+        <button ng-click="bookController.clickMe(book)">Click Me</button>
+      </div>
     </main>
 
   </body>

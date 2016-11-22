@@ -28,6 +28,10 @@ myApp.controller("BookController", ["$http", function($http) {
       });
   }
 
+  self.clickMe = function(bookObj) {
+    console.log(bookObj);
+  }
+
 }]);
 
 // $(document).ready(function () {
