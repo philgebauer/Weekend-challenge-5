@@ -3,6 +3,7 @@
   <head>
     <title>Put that Postgres in that Node</title>
     <script src="vendor/angular.min.js"></script>
+    <!-- <script src="vendor/angularUniqueFilter.js"></script> -->
     <script src="scripts/client-app.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Taviraj" rel="stylesheet">
     <link rel="stylesheet" href="vendor/bootstrap.min.css" />
@@ -49,7 +50,7 @@
       </form>
 
       <h2>Books</h2>
-      <select ng-model="bookController.searchObject" ng-options="book.genre for book in bookController.books">
+      <select ng-model="bookController.searchObject" ng-options="book.genre for book in bookController.books | unique: 'genre'" >
 
       </select>
       <div class="book" ng-repeat="book in bookController.books | filter: {'genre': bookController.searchObject.genre} ">

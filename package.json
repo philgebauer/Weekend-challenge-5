@@ -13,6 +13,7 @@
     "angular": "^1.5.8",
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
+    "lodash.uniq": "^4.5.0",
     "pg": "^6.1.0"
   }
 }
