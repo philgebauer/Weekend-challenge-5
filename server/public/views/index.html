@@ -1,71 +1,61 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Put that Postgres in that Node</title>
+
+<head>
+    <title>Weekend Challenge 5</title>
     <script src="vendor/angular.min.js"></script>
-    <!-- <script src="vendor/angularUniqueFilter.js"></script> -->
     <script src="scripts/client-app.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Taviraj" rel="stylesheet">
     <link rel="stylesheet" href="vendor/bootstrap.min.css" />
-    <link rel="stylesheet" href="styles/styles.css"  />
-  </head>
-  <body ng-app="myApp">
-    <main class="container" ng-controller="BookController as bookController">
-      <header>
-        <h1>The Sigmanauts Library presents...</h1>
-      </header>
-      <h2>Add a book</h2>
-      <form id="book-form">
-        <div class="form-group">
-          <label for="title">Title:</label>
-          <input type="text" ng-model="bookController.newBook.title" name="title" class="form-control" />
-        </div>
+    <link rel="stylesheet" href="styles/styles.css" />
+</head>
 
-        <div class="form-group">
-          <label for="author">Author:</label>
-          <input type="text" ng-model="bookController.newBook.author" name="author" class="form-control" />
-        </div>
+<body ng-app="myApp">
+    <main ng-controller="EmployeeController as employee ">
 
-        <div class="form-group">
-          <label for="published">Published Date:</label>
-          <input type="date" ng-model="bookController.newBook.published" name="published"  class="form-control"/>
-        </div>
+        <section class="container">
+            <h1>Sigmanaut's angular list</h1>
+            <h3>Add a new person</h3>
+            <form class="col-md-12">
+                <div class="form-group col-md-6">
+                    <label for="firstName">First Name</label>
+                    <input type="text" name="firstName" class="form-control" ng-model="employee.newEmployee.firstName" placeholder="First Name" />
+                    <label for="employeeID">Employee ID</label>
+                    <input type="text" name="employeeID" class="form-control" ng-model="employee.newEmployee.employeeID" placeholder="Employee ID" />
+                    <label for="annualSalary">Annual Salary</label>
+                    <input type="text" name="annualSalary" class="form-control" ng-model="employee.newEmployee.annualSalary" placeholder="Annual Salary" />
 
-        <div class="form-group">
-          <label for="genre">Genre:</label>
-          <input type="text" ng-model="bookController.newBook.genre" name="genre" class="form-control"/>
-        </div>
 
-        <div class="form-group">
-          <label for="edition">Edition:</label>
-          <input type="number" ng-model="bookController.newBook.edition" name="edition" class="form-control"/>
-        </div>
+                </div>
+                <div class="from-group col-md-6">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" name="lastName" class="form-control" ng-model="employee.newEmployee.lastName" placeholder="Last Name" />
+                    <label for="jobTitle">Job Title</label>
+                    <input type="text" name="jobTitle" class="form-control" ng-model="employee.newEmployee.jobTitle" placeholder="Job Title" />
+                    <br />
+                    <button type="submit" class="btn btn-primary" ng-click="employee.addEmployee()">Submit</button>
 
-        <div class="form-group">
-          <label for="publisher">Publisher:</label>
-          <input type="text" ng-model="bookController.newBook.publisher" name="publisher" class="form-control"/>
-        </div>
+                </div>
+        </section>
+        <section class ='container'>
 
-        <button class="btn btn-default" ng-click="bookController.addBook()">Go</button>
-      </form>
+            <h2>Employees</h2>
+            <!-- <select ng-model="bookController.searchObject" ng-options="book.genre for book in bookController.books | unique: 'genre'"> -->
 
-      <h2>Books</h2>
-      <select ng-model="bookController.searchObject" ng-options="book.genre for book in bookController.books | unique: 'genre'" >
 
-      </select>
-      <div class="book" ng-repeat="book in bookController.books | filter: {'genre': bookController.searchObject.genre} ">
+            <div class="employee" ng-repeat="employee in employee.employees">
 
-        <input ng-model="book.title" />
-        <input ng-model="book.author"/>
-        <input ng-model="book.published"/>
-        <input ng-model="book.genre"/>
-        <input ng-model="book.edition" />
-        <input ng-model="book.publisher"/>
+                <input ng-model="employee.firstname" />
+                <input ng-model="employee.lastname" />
+                <input ng-model="employee.employeeid" />
+                <input ng-model="employee.jobtitle" />
+                <input ng-model="employee.annualsalary" />
 
-        <button ng-click="bookController.clickMe(book)">Delete</button>
-        <button ng-click="bookController.updateMe(book)">Edit</button>
-      </div>
+                <button ng-click="employee.clickMe(employees)">Delete</button>
+                <button ng-click="employee.updateMe(employees)">Edit</button>
+            </div>
+          </section>
     </main>
 
-  </body>
+</body>
+
 </html>

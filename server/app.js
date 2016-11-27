@@ -2,19 +2,19 @@ var express =  require('express');
 var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
-var books = require('./routes/books');
+var employees = require('./routes/employees');
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json()); // needed by Angular
+app.use(bodyParser.json());
 
-// middleware that doesn't do much
+
 app.use(function(req, res, next) {
   console.log('hello from express!');
   next();
 });
 
-// Our routes
-app.use('/books', books);
+//routes
+app.use('/employees', employees);
 
 // Catchall route
 app.get('/', function (req, res) {
