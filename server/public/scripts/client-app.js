@@ -1,4 +1,22 @@
-var myApp = angular.module("myApp", []);
+var myApp = angular.module('myApp', ['ngRoute']);
+
+
+myApp.config(['$routeProvider', function($routeProvider) {
+  $routeProvider
+  .when('/employees', {
+    templateUrl: '/views/templates/employees.html',
+    controller: 'EmployeesController',
+    controllerAs: 'employees'
+  })
+  .when('/budget', {
+    templateUrl: '/views/templates/budget.html',
+    controller: 'BudgetsController',
+    controllerAs: 'budget'
+  })
+  .otherwise({
+    redirectTo: 'employees'
+  });
+}]);
 
 
 myApp.controller("EmployeeController", ["$http", function($http) {
@@ -7,6 +25,7 @@ myApp.controller("EmployeeController", ["$http", function($http) {
   var self = this;
   self.newEmployee = {};
   self.employees = [];
+  self.salary = 0;
 
   getEmployees();
 
@@ -17,6 +36,7 @@ myApp.controller("EmployeeController", ["$http", function($http) {
         console.log('HIIIII');
         console.log(response.data);
         self.employees = response.data;
+        salaryCalc();
       });
   }
 
@@ -46,5 +66,39 @@ myApp.controller("EmployeeController", ["$http", function($http) {
       getEmployees();
     })
   }
+
+
+  function salaryCalc() {
+    for (var i = 0; i < self.employees.length; i++) {
+      self.salary += self.employees[i].annualsalary;
+    }
+    self.salary /= 12;
+  }
+
+}]);
+
+myApp.controller("SalaryController", ["$http", function($http) {
+  console.log('salary controller running');
+
+var self = this;
+
+self.salary = [];
+self.newSalary = {};
+
+
+getBudgets();
+console.log("salary is", self.budgets);
+
+
+
+function getBudgets() {
+  $http.get('/salary')
+  .then(function(response) {
+    self.salary = response.data;
+    console.log(response.data);
+
+  });
+};
+
 
 }]);

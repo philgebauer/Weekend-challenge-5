@@ -4,6 +4,7 @@
 <head>
     <title>Weekend Challenge 5</title>
     <script src="vendor/angular.min.js"></script>
+    <script src="vendor/angular-route.min.js" type="text/javascript"></script>
     <script src="scripts/client-app.js"></script>
     <link rel="stylesheet" href="vendor/bootstrap.min.css" />
     <link rel="stylesheet" href="styles/styles.css" />
@@ -54,6 +55,11 @@
                 <button ng-click="employee.updateMe(employees)">Edit</button>
             </div>
           </section>
+
+          <h2>Total Monthly Salary Expenditure</h2>
+          <div id="salaryCalc" ng-model="employee.salary">${{employee.salary}}</div>
+
+
     </main>
 
 </body>

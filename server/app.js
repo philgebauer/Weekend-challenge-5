@@ -3,6 +3,7 @@ var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
 var employees = require('./routes/employees');
+var salary = require('./routes/salary');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -15,6 +16,7 @@ app.use(function(req, res, next) {
 
 //routes
 app.use('/employees', employees);
+app.use('/salary', salary);
 
 // Catchall route
 app.get('/', function (req, res) {
