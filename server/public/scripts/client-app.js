@@ -1,18 +1,18 @@
-var myApp = angular.module('myApp', ['ngRoute']);
+var myApp = angular.module('myApp', []);
 
 // - route provider / not needed now / will use when seperate salary page and controller are added - //
 
-myApp.config(['$routeProvider', function($routeProvider) {
-  $routeProvider
-  .when('/employees', {
-    templateUrl: '/views/templates/employees.html',
-    controller: 'EmployeeController',
-    controllerAs: 'employees'
-  })
-  .otherwise({
-    redirectTo: 'employees'
-  });
-}]);
+// myApp.config(['$routeProvider', function($routeProvider) {
+//   $routeProvider
+//   .when('/employees', {
+//     templateUrl: '/views/templates/employees.html',
+//     controller: 'EmployeeController',
+//     controllerAs: 'employees'
+//   })
+//   .otherwise({
+//     redirectTo: 'employees'
+//   });
+// }]);
 
 
 // - EmployeeController - //
