@@ -41,25 +41,37 @@
 
             <h2>Employees</h2>
             <!-- <select ng-model="bookController.searchObject" ng-options="book.genre for book in bookController.books | unique: 'genre'"> -->
+        <table class='table'>
+          <thead>
+              <tr>
+                <td>First Name</td>
+                <td>Last Name</td>
+                <td>ID Number</td>
+                <td>Job Title</td>
+                <td>Annual Salary</td>
+              </tr>
+            </thead>
+            <tbody>
+            <tr class="employee" ng-repeat="employee in employee.employees">
 
+                <td ng-model="employee.firstname">{{employee.firstname}}</td>
+                <td ng-model="employee.lastname" >{{employee.lastname}}</td>
+                <td ng-model="employee.employeeid">{{employee.employeeid}}</td>
+                <td ng-model="employee.jobtitle" >{{employee.jobtitle}}</td>
+                <td ng-model="employee.annualsalary">{{employee.annualsalary}}</td>
 
-            <div class="employee" ng-repeat="employee in employee.employees">
-
-                <input ng-model="employee.firstname" />
-                <input ng-model="employee.lastname" />
-                <input ng-model="employee.employeeid" />
-                <input ng-model="employee.jobtitle" />
-                <input ng-model="employee.annualsalary" />
-
-                <button ng-click="employee.clickMe(employees)">Delete</button>
-                <button ng-click="employee.updateMe(employees)">Edit</button>
-            </div>
+                <!-- <button ng-click="employee.clickMe(employees)">Delete</button>
+                <button ng-click="employee.updateMe(employees)">Edit</button> -->
+            </tr>
+          </tbody>
+        </table>
           </section>
+          <section class='container'>
 
           <h2>Total Monthly Salary Expenditure</h2>
-          <div id="salaryCalc" ng-model="employee.salary">${{employee.salary}}</div>
+        <h3>  <div id="salaryCalc" ng-model="employee.salary">${{employee.salary}}</div> </h3>
 
-
+        </section>
     </main>
 
 </body>
