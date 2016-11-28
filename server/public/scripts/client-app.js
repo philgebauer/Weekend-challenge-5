@@ -1,5 +1,6 @@
 var myApp = angular.module('myApp', ['ngRoute']);
 
+// - route provider / not needed now / will use when seperate salary page and controller are added - //
 
 myApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider
@@ -14,6 +15,8 @@ myApp.config(['$routeProvider', function($routeProvider) {
 }]);
 
 
+// - EmployeeController - //
+
 myApp.controller("EmployeeController", ["$http", function($http) {
   console.log('running');
 
@@ -24,7 +27,8 @@ myApp.controller("EmployeeController", ["$http", function($http) {
 
   getEmployees();
 
-  // read only
+// - grab all employees from the database - //
+
   function getEmployees() {
     $http.get('/employees')
       .then(function(response) {
@@ -34,7 +38,8 @@ myApp.controller("EmployeeController", ["$http", function($http) {
       });
   }
 
-  // tied to DOM thru self object
+// - add new employee to database - //
+
   self.addEmployee = function() {
     console.log('employees: ', self.newEmployee);
     $http.post('/employees', self.newEmployee)
@@ -44,23 +49,17 @@ myApp.controller("EmployeeController", ["$http", function($http) {
       });
   }
 
-  self.clickMe = function(empObj) {
-    console.log(empObj);
-    $http.delete('/employees/' + empObj.id)
+// - horrible name / delete button function / not working yet - //
+  self.clickMe = function(empID) {
+    console.log(empID);
+    $http.delete('/employees/' + empID.id)
       .then(function(response){
         console.log('delete finsished');
         getBooks();
       })
   }
 
-  self.updateMe = function(empObj){
-    $http.put('/employees/'+ empObj.id, empObj)
-    .then(function(response){
-      console.log('Edit finsished');
-      getEmployees();
-    })
-  }
-
+// - grab all salaries and divide by 12 for monthly salary - //
 
   function salaryCalc() {
     for (var i = 0; i < self.employees.length; i++) {
@@ -70,29 +69,3 @@ myApp.controller("EmployeeController", ["$http", function($http) {
   }
 
 }]);
-
-// myApp.controller("SalaryController", ["$http", function($http) {
-//   console.log('salary controller running');
-//
-// var self = this;
-//
-// self.salary = [];
-// self.newSalary = {};
-//
-//
-// getBudgets();
-// console.log("salary is", self.budgets);
-//
-//
-//
-// function getBudgets() {
-//   $http.get('/salary')
-//   .then(function(response) {
-//     self.salary = response.data;
-//     console.log(response.data);
-//
-//   });
-// };
-//
-//
-// }]);

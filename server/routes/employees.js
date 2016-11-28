@@ -3,16 +3,10 @@ var router = express.Router();
 var pg = require('pg');
 var connectionString = 'postgres://localhost:5432/sigma';
 
-// router.get('/:genre/*/*', function(req, res, next) {
-//   console.log('req params', req.params);
-//   req.message = "hello from the previous middleware!";
-//   res.send('done');
-//   // next();
-// });
+// - get employee data - //
 
 router.get('/', function(req, res) {
   console.log('message on REC: ', req.message);
-  // get books from DB
   pg.connect(connectionString, function(err, client, done) {
     if(err) {
       console.log('connection error: ', err);
@@ -20,9 +14,7 @@ router.get('/', function(req, res) {
     }
 
     client.query('SELECT * FROM employees', function(err, result) {
-      done(); // close the connection.
-
-      // console.log('the client!:', client);
+      done();
 
       if(err) {
         console.log('select query error: ', err);
@@ -35,38 +27,10 @@ router.get('/', function(req, res) {
   });
 });
 
-router.post('/', function(req, res) {
-  var newEmployee = req.body;
-  console.log(newEmployee);
-  pg.connect(connectionString, function(err, client, done) {
-    if(err) {
-      console.log('connection error: ', err);
-      res.sendStatus(500);
-    }
-
-    client.query(
-      'INSERT INTO employees (firstName, lastName, employeeID, jobTitle, annualSalary) ' +
-      'VALUES ($1, $2, $3, $4, $5)',
-      [newEmployee.firstName, newEmployee.lastName, newEmployee.employeeID, newEmployee.jobTitle, newEmployee.annualSalary],
-      function(err, result) {
-        done();
-
-        if(err) {
-          console.log('insert query error: ', err);
-          res.sendStatus(500);
-        } else {
-          res.sendStatus(201);
-        }
-      });
-
-  });
-
-});
+// - delete individual worker - not workin yet - //
 
 router.delete('/:id', function(req, res) {
-  empID = req.params.id;
-
-  console.log('book id to delete: ', empID);
+  var empID = req.params.id;
   pg.connect(connectionString, function(err, client, done) {
     if(err) {
       console.log('connection error: ', err);
@@ -88,6 +52,8 @@ router.delete('/:id', function(req, res) {
     });
 
 });
+
+// - update database with new employee info - //
 
 router.put('/:id', function(req, res) {
   empID = req.params.id;
@@ -115,9 +81,7 @@ router.put('/:id', function(req, res) {
           console.log('get');
         }
       });
-    }); // close connect
-
-}); // end route
-
+    });
+});
 
 module.exports = router;

@@ -4,12 +4,16 @@ h2 {
 }
 
 .employee {
-  border: 1px solid magenta;
+  border: 1px solid teal;
   margin-bottom: 12px;
   padding: 10px;
 }
 
 
 h1 {
+  color: teal;
+}
+
+thead {
   color: teal;
 }
