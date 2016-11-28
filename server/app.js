@@ -10,7 +10,6 @@ app.use(bodyParser.json());
 
 
 app.use(function(req, res, next) {
-  console.log('hello from express!');
   next();
 });
 

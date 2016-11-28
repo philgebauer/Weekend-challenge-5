@@ -11,68 +11,15 @@
 </head>
 
 <body ng-app="myApp">
-    <main ng-controller="EmployeeController as employee ">
 
-        <section class="container">
-            <h1>Sigmanaut's angular list</h1>
-            <h3>Add a new person</h3>
-            <form class="col-md-12">
-                <div class="form-group col-md-6">
-                    <label for="firstName">First Name</label>
-                    <input type="text" name="firstName" class="form-control" ng-model="employee.newEmployee.firstName" placeholder="First Name" />
-                    <label for="employeeID">Employee ID</label>
-                    <input type="text" name="employeeID" class="form-control" ng-model="employee.newEmployee.employeeID" placeholder="Employee ID" />
-                    <label for="annualSalary">Annual Salary</label>
-                    <input type="text" name="annualSalary" class="form-control" ng-model="employee.newEmployee.annualSalary" placeholder="Annual Salary" />
+<div class="text-center" ng-include="'/views/templates/header.html'"></div>
 
+<div ng-include="'/views/templates/navbar.html'"></div>
 
-                </div>
-                <div class="from-group col-md-6">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" name="lastName" class="form-control" ng-model="employee.newEmployee.lastName" placeholder="Last Name" />
-                    <label for="jobTitle">Job Title</label>
-                    <input type="text" name="jobTitle" class="form-control" ng-model="employee.newEmployee.jobTitle" placeholder="Job Title" />
-                    <br />
-                    <button type="submit" class="btn btn-primary" ng-click="employee.addEmployee()">Submit</button>
+<main ng-view></main>
 
-                </div>
-        </section>
-        <section class ='container'>
+<footer class="text-center" ng-include="'/views/templates/footer.html'"></footer>
 
-            <h2>Employees</h2>
-            <!-- <select ng-model="bookController.searchObject" ng-options="book.genre for book in bookController.books | unique: 'genre'"> -->
-        <table class='table'>
-          <thead>
-              <tr>
-                <td>First Name</td>
-                <td>Last Name</td>
-                <td>ID Number</td>
-                <td>Job Title</td>
-                <td>Annual Salary</td>
-              </tr>
-            </thead>
-            <tbody>
-            <tr class="employee" ng-repeat="employee in employee.employees">
-
-                <td ng-model="employee.firstname">{{employee.firstname}}</td>
-                <td ng-model="employee.lastname" >{{employee.lastname}}</td>
-                <td ng-model="employee.employeeid">{{employee.employeeid}}</td>
-                <td ng-model="employee.jobtitle" >{{employee.jobtitle}}</td>
-                <td ng-model="employee.annualsalary">{{employee.annualsalary}}</td>
-
-                <!-- <button ng-click="employee.clickMe(employees)">Delete</button>
-                <button ng-click="employee.updateMe(employees)">Edit</button> -->
-            </tr>
-          </tbody>
-        </table>
-          </section>
-          <section class='container'>
-
-          <h2>Total Monthly Salary Expenditure</h2>
-        <h3>  <div id="salaryCalc" ng-model="employee.salary">${{employee.salary}}</div> </h3>
-
-        </section>
-    </main>
 
 </body>
 

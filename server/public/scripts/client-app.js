@@ -5,13 +5,8 @@ myApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider
   .when('/employees', {
     templateUrl: '/views/templates/employees.html',
-    controller: 'EmployeesController',
+    controller: 'EmployeeController',
     controllerAs: 'employees'
-  })
-  .when('/budget', {
-    templateUrl: '/views/templates/budget.html',
-    controller: 'BudgetsController',
-    controllerAs: 'budget'
   })
   .otherwise({
     redirectTo: 'employees'
@@ -33,7 +28,6 @@ myApp.controller("EmployeeController", ["$http", function($http) {
   function getEmployees() {
     $http.get('/employees')
       .then(function(response) {
-        console.log('HIIIII');
         console.log(response.data);
         self.employees = response.data;
         salaryCalc();
@@ -77,28 +71,28 @@ myApp.controller("EmployeeController", ["$http", function($http) {
 
 }]);
 
-myApp.controller("SalaryController", ["$http", function($http) {
-  console.log('salary controller running');
-
-var self = this;
-
-self.salary = [];
-self.newSalary = {};
-
-
-getBudgets();
-console.log("salary is", self.budgets);
-
-
-
-function getBudgets() {
-  $http.get('/salary')
-  .then(function(response) {
-    self.salary = response.data;
-    console.log(response.data);
-
-  });
-};
-
-
-}]);
+// myApp.controller("SalaryController", ["$http", function($http) {
+//   console.log('salary controller running');
+//
+// var self = this;
+//
+// self.salary = [];
+// self.newSalary = {};
+//
+//
+// getBudgets();
+// console.log("salary is", self.budgets);
+//
+//
+//
+// function getBudgets() {
+//   $http.get('/salary')
+//   .then(function(response) {
+//     self.salary = response.data;
+//     console.log(response.data);
+//
+//   });
+// };
+//
+//
+// }]);
